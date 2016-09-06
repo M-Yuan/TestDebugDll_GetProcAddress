@@ -1,33 +1,33 @@
-// CheckDll.cpp : ¶¨Òå¿ØÖÆÌ¨Ó¦ÓÃ³ÌĞòµÄÈë¿Úµã¡£
+// CheckDll.cpp : å®šä¹‰æ§åˆ¶å°åº”ç”¨ç¨‹åºçš„å…¥å£ç‚¹ã€‚
 //
 
 #include "stdafx.h"
 #include <afx.h>
 #include <minwindef.h>
 
-//typedefÓëº¯Êıtest01ÀàĞÍÏàÍ¬µÄº¯ÊıÖ¸ÕëÎªTESTDLL01
+//typedefä¸å‡½æ•°test01ç±»å‹ç›¸åŒçš„å‡½æ•°æŒ‡é’ˆä¸ºTESTDLL01
 typedef int (_cdecl * TESTDLL01)(int ia, int ib, int ic);
 typedef int (_cdecl * TESTDLL02)(int ia, int ib);
 
 int _tmain(int argc, _TCHAR* argv[])
 {
 	HINSTANCE hmod;
-	//¼ÓÔØ¶¯Ì¬Á´½Ó¿âCreateDll.dll
+	//åŠ è½½åŠ¨æ€é“¾æ¥åº“CreateDll.dll
 	hmod = LoadLibrary(_TEXT("../Debug/CreateDll.dll"));
 	if(NULL == hmod)
 	{
-		printf("¼ÓÔØCreateDll.dllÊ§°Ü");
-		TRACE("¼ÓÔØCreateDll.dllÊ§°Ü");
+		printf("åŠ è½½CreateDll.dllå¤±è´¥");
+		TRACE("åŠ è½½CreateDll.dllå¤±è´¥");
 	}
 
-	//¶¨ÒåÒ»¸öÓëº¯ÊıTestFuctionÀàĞÍÏàÍ¬µÄº¯ÊıÖ¸Õëlpproc
+	//å®šä¹‰ä¸€ä¸ªä¸å‡½æ•°TestFuctionç±»å‹ç›¸åŒçš„å‡½æ•°æŒ‡é’ˆlpproc
 	TESTDLL01 lpproc01;
 	TESTDLL02 lpproc02;
-	//ËÑË÷CreateDll.dllÖĞº¯ÊıÃûÎªTestFuctionµÄ¶ÔÍâ½Ó¿Ú
+	//æœç´¢CreateDll.dllä¸­å‡½æ•°åä¸ºTestFuctionçš„å¯¹å¤–æ¥å£
 	lpproc01 = (TESTDLL01)GetProcAddress(hmod, "test01");
 	lpproc02 = (TESTDLL02)GetProcAddress(hmod, "test02");
 
-	//Èç¹ûËÑË÷³É¹¦
+	//å¦‚æœæœç´¢æˆåŠŸ
 	if(NULL != lpproc01 && NULL != lpproc02)
 	{
 		printf("Test DLL values: %d \n", lpproc01(1, 2, 3));
@@ -37,22 +37,9 @@ int _tmain(int argc, _TCHAR* argv[])
 		TRACE1("%d ", GetLastError());
 	}
 
-	//ÔÚÇ¡µ±µÄÊ±ºòÊÍ·Å¶¯Ì¬Á´½Ó¿âCreateDll.dll
+	//åœ¨æ°å½“çš„æ—¶å€™é‡Šæ”¾åŠ¨æ€é“¾æ¥åº“CreateDll.dll
 	FreeLibrary(hmod);
 
-	/*************************************************
-	printf("Simple DLL test start. \n\n");
-
-	printf("Call DLL test01 function: \n");
-	printf("Test DLL values: %d \n", test01(1, 2, 3));
-	printf("Call DLL test01 function end. \n\n");
-
-	printf("Call DLL test02 function: \n");
-	printf("Test DLL test02 values: %d \n", test02(5, 2));
-	printf("Call DLL test02 function end. \n\n");
-
-	printf("Simple DLL test end. \n");
-	*************************************************/
 	getchar();
 	return 0;
 }
