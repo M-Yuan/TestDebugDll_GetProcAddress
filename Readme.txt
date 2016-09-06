@@ -1,14 +1,18 @@
-�����
-1>------ ����������: ��Ŀ: CheckDll, ����: Debug Win32 ------
+编译后：
+1>------ 已启动生成: 项目: CheckDll, 配置: Debug Win32 ------
 1>  stdafx.cpp
 1>  CheckDll.cpp
 1>c:\program files\microsoft visual studio 11.0\vc\atlmfc\include\afx.h(24): fatal error C1189: #error :  Building MFC application with /MD[d] (CRT dll version) requires MFC shared dll version. Please #define _AFXDLL or do not use /MD[d]
-========== ����: �ɹ� 0 ����ʧ�� 1 �������� 1 �������� 0 �� ==========
+========== 生成: 成功 0 个，失败 1 个，最新 1 个，跳过 0 个 ==========
 
 
-����ָô����޸ķ�����
+会出现该错误，修改方法：
 
-�ڵ���dll��̬���ӿ�Ĺ����У���CheckDll���̣���ѡ�����ԣ��޸Ĳ�������
+在调用dll动态链接库的工程中（即CheckDll工程），选择属性，修改参数如下
 
-����--->����--->����--->Ȼ��ѡ��ʹ��mFC��Ϊ������DLL��
+工程--->设置--->常规--->然后选“使用mFC作为共享的DLL”
 
+
+
+
+本案例，测试调用动态链接 dll 文件，同时也测试入口函数 dllMain 函数中，进程和线程的工作流程
